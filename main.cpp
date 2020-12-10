@@ -58,7 +58,7 @@ bool IsDone(const char& c)
     return (c == (char) 0);
 }
 
-typedef Machine<InStr, char, std::string> Parser;
+typedef machine::Machine<InStr, char, std::string> Parser;
 typedef Parser::State State;
 typedef Parser::Link Link;
 

@@ -9,6 +9,7 @@
 #ifndef machine_hpp
 #define machine_hpp
 
+namespace machine {
 template<typename TInput, typename TToken, typename TOutput>
 class Machine
 {
@@ -174,5 +175,6 @@ bool Machine<TInput, TToken, TOutput>::process(TInput& input, TOutput& output) c
     }
     return true;
 }
+}//namespace machine
 
 #endif /* machine_hpp */

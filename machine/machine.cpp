@@ -7,3 +7,6 @@
 //
 
 #include "machine.hpp"
+
+namespace machine {
+}
