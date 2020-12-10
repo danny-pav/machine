@@ -80,17 +80,45 @@ static Link links[] = {
 
 static Parser parser(sStart, sEnd, LoadChar);
 
-void testPass(const std::string& s)
+void testPass1(const std::string& s)
 {
+    std::cout << "in:" << s << std::endl;
     InStr in(s);
     std::string out;
-    parser.process(in, out);
+    if (!parser.process(in, out))
+    {
+        std::cout << "ERROR" << std::endl;
+    }
+    std::cout << "out:" << out << std::endl;
+}
+
+void testPass2(const std::string& s)
+{
     std::cout << "in:" << s << std::endl;
+    InStr in(s);
+    std::string out;
+    Parser::Iterator it(parser, in, out);
+    size_t numSteps = 0;
+    while (!it.atEnd())
+    {
+        std::cout << "step=" << numSteps << " out=" << out << std::endl;
+        ++numSteps;
+        if (!parser.processStep(it))
+        {
+            std::cout << "ERROR" << std::endl;
+            break;
+        }
+    }
+    std::cout << "steps=" << numSteps << std::endl;
     std::cout << "out:" << out << std::endl;
 }
 
 int main(int argc, const char * argv[]) {
-    testPass("32");
-    testPass("101.57");
+    testPass1("32");
+    testPass1("101.57");
+    testPass1("32,000");
+    testPass2("32");
+    testPass2("101.57");
+    testPass2("32,000");
     return 0;
 }
