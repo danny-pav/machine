@@ -13,6 +13,8 @@ namespace machine {
 template<typename TInput, typename TToken, typename TOutput>
 class Machine
 {
+    friend class Iterator;
+
 public:
     using Action = void (*)(TOutput&, const TToken&);
     using Filter = bool (*)(const TToken&);
@@ -82,6 +84,26 @@ public:
     };
     
 public:
+    class Iterator
+    {
+        friend class Machine;
+        
+    public:
+        Iterator(const Machine& machine, TInput& input, TOutput& output)
+        : m_machine(machine), m_input(input), m_output(output), m_state(&m_machine.m_start)
+        { }
+        
+    public:
+        bool atEnd() const { return (m_state == &m_machine.m_stop); }
+        
+    private:
+        const Machine& m_machine;
+        TInput& m_input;
+        TOutput& m_output;
+        const State * m_state;
+    };
+    
+public:
     Machine(
         const State& start,
         const State& stop,
@@ -93,6 +115,7 @@ public:
 
 public:
     bool process(TInput& input, TOutput& output) const;
+    bool processStep(Iterator& it) const;
     
 private:
     const State& m_start;
@@ -100,6 +123,9 @@ private:
     Advance m_advance;
 };
 
+/*
+ functions
+ */
 
 template<
 typename TInput,
@@ -175,6 +201,16 @@ bool Machine<TInput, TToken, TOutput>::process(TInput& input, TOutput& output) c
     }
     return true;
 }
+
+template<typename TInput, typename TToken, typename TOutput>
+bool Machine<TInput, TToken, TOutput>::processStep(Iterator& it) const
+{
+    TToken token;
+    (*m_advance)(it.m_input, token);
+    it.m_state = it.m_state->nextState(token, it.m_output);
+    return (it.m_state != nullptr);
+}
+
 }//namespace machine
 
 #endif /* machine_hpp */
