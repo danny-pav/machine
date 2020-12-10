@@ -41,11 +41,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B3BC113224574EF400E8340E = {
+		B379CF31258284F20069A3DB /* machine */ = {
 			isa = PBXGroup;
 			children = (
 				B379CF29258276BA0069A3DB /* machine.cpp */,
 				B379CF2A258276BA0069A3DB /* machine.hpp */,
+			);
+			path = machine;
+			sourceTree = "<group>";
+		};
+		B3BC113224574EF400E8340E = {
+			isa = PBXGroup;
+			children = (
+				B379CF31258284F20069A3DB /* machine */,
 				B3BC113E24574EF500E8340E /* main.cpp */,
 				B3BC113C24574EF500E8340E /* Products */,
 			);
