@@ -26,6 +26,8 @@
 /* Begin PBXFileReference section */
 		B379CF29258276BA0069A3DB /* machine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = machine.cpp; sourceTree = "<group>"; };
 		B379CF2A258276BA0069A3DB /* machine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = machine.hpp; sourceTree = "<group>"; };
+		B379CF3A2582B11E0069A3DB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B379CF3B2582C89C0069A3DB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B3BC113B24574EF500E8340E /* machine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = machine; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3BC113E24574EF500E8340E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +55,8 @@
 		B3BC113224574EF400E8340E = {
 			isa = PBXGroup;
 			children = (
+				B379CF3B2582C89C0069A3DB /* LICENSE */,
+				B379CF3A2582B11E0069A3DB /* README.md */,
 				B379CF31258284F20069A3DB /* machine */,
 				B3BC113E24574EF500E8340E /* main.cpp */,
 				B3BC113C24574EF500E8340E /* Products */,
