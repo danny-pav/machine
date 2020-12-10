@@ -9,6 +9,8 @@
 #ifndef machine_hpp
 #define machine_hpp
 
+struct Nothing { };
+
 namespace machine {
 template<typename TInput, typename TToken, typename TOutput>
 class Machine
