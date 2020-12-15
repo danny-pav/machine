@@ -25,6 +25,7 @@ public:
 public:
     static Filter noFilter() { return nullptr; }
     static Action doNothing() { return nullptr; }
+    static Advance noAdvance() { return nullptr; }
 
 public:
     class Link;
@@ -196,7 +197,8 @@ bool Machine<TInput, TToken, TOutput>::process(TInput& input, TOutput& output) c
     TToken token;
     while (state != &m_stop)
     {
-        (*m_advance)(input, token);
+        if (m_advance)
+            (*m_advance)(input, token);
         state = state->nextState(token, output);
         if (!state)
             return false;
@@ -208,7 +210,8 @@ template<typename TInput, typename TToken, typename TOutput>
 bool Machine<TInput, TToken, TOutput>::processStep(Iterator& it) const
 {
     TToken token;
-    (*m_advance)(it.m_input, token);
+    if (m_advance)
+        (*m_advance)(it.m_input, token);
     it.m_state = it.m_state->nextState(token, it.m_output);
     return (it.m_state != nullptr);
 }
