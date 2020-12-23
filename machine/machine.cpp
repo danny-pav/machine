@@ -8,5 +8,6 @@
 
 #include "machine.hpp"
 
-namespace machine {
+namespace machine
+{
 }

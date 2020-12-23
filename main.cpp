@@ -12,13 +12,17 @@
 class InStr
 {
 public:
-    InStr(const std::string& s) : m_s(s), m_pos(0) { }
-    ~InStr() {}
-    
+    InStr(const std::string& s) : m_s(s), m_pos(0)
+    {
+    }
+    ~InStr()
+    {
+    }
+
 public:
     char read()
     {
-        char c = (char) 0;
+        char c = (char)0;
         if (m_pos < m_s.length())
         {
             c = m_s[m_pos];
@@ -26,7 +30,7 @@ public:
         }
         return c;
     }
-    
+
 private:
     std::string m_s;
     size_t m_pos;
@@ -39,7 +43,7 @@ void LoadChar(InStr& in, char& c)
 
 void SaveChar(std::string& out, const char& c)
 {
-    if (c != (char) 0)
+    if (c != (char)0)
         out += c;
 }
 
@@ -55,7 +59,7 @@ bool IsDecimal(const char& c)
 
 bool IsDone(const char& c)
 {
-    return (c == (char) 0);
+    return (c == (char)0);
 }
 
 typedef machine::Machine<InStr, char, std::string> Parser;
@@ -68,15 +72,9 @@ static State sDecimal;
 static State sDigit2(SaveChar);
 static State sEnd(SaveChar);
 static Link links[] = {
-    {sStart, sDigit1, IsDigit},
-    {sDigit1, sDigit1, IsDigit},
-    {sDigit1, sDecimal, IsDecimal, SaveChar},
-    {sDigit1, sEnd, IsDone},
-    {sDecimal, sDigit2, IsDigit},
-    {sDecimal, sEnd, IsDone},
-    {sDigit2, sDigit2, IsDigit},
-    {sDigit2, sEnd, IsDone}
-};
+    {sStart, sDigit1, IsDigit},  {sDigit1, sDigit1, IsDigit},  {sDigit1, sDecimal, IsDecimal, SaveChar},
+    {sDigit1, sEnd, IsDone},     {sDecimal, sDigit2, IsDigit}, {sDecimal, sEnd, IsDone},
+    {sDigit2, sDigit2, IsDigit}, {sDigit2, sEnd, IsDone}};
 
 static Parser parser(sStart, sEnd, LoadChar);
 
@@ -113,7 +111,8 @@ void testPass2(const std::string& s)
     std::cout << "out:" << out << std::endl;
 }
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[])
+{
     testPass1("32");
     testPass1("101.57");
     testPass1("32,000");
