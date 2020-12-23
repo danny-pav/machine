@@ -12,17 +12,13 @@
 class InStr
 {
 public:
-    InStr(const std::string& s) : m_s(s), m_pos(0)
-    {
-    }
-    ~InStr()
-    {
-    }
+    InStr(const std::string& s) : m_s(s), m_pos(0) {}
+    ~InStr() {}
 
 public:
     char read()
     {
-        char c = (char)0;
+        char c = (char) 0;
         if (m_pos < m_s.length())
         {
             c = m_s[m_pos];
@@ -43,7 +39,7 @@ void LoadChar(InStr& in, char& c)
 
 void SaveChar(std::string& out, const char& c)
 {
-    if (c != (char)0)
+    if (c != (char) 0)
         out += c;
 }
 
@@ -59,7 +55,7 @@ bool IsDecimal(const char& c)
 
 bool IsDone(const char& c)
 {
-    return (c == (char)0);
+    return (c == (char) 0);
 }
 
 typedef machine::Machine<InStr, char, std::string> Parser;

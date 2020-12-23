@@ -9,13 +9,13 @@
 #ifndef machine_hpp
 #define machine_hpp
 
+namespace machine
+{
 struct Nothing
 {
 };
 
-namespace machine
-{
-template <typename TInput, typename TToken, typename TOutput>
+template<typename TInput, typename TToken, typename TOutput>
 class Machine
 {
     friend class Iterator;
@@ -26,18 +26,9 @@ public:
     using Advance = void (*)(TInput&, TToken&);
 
 public:
-    static Filter noFilter()
-    {
-        return nullptr;
-    }
-    static Action doNothing()
-    {
-        return nullptr;
-    }
-    static Advance noAdvance()
-    {
-        return nullptr;
-    }
+    static Filter noFilter() { return nullptr; }
+    static Action doNothing() { return nullptr; }
+    static Advance noAdvance() { return nullptr; }
 
 public:
     class Link;
@@ -49,9 +40,7 @@ public:
         friend class Machine;
 
     public:
-        State(Action action = doNothing()) : m_action(action), m_firstLink(nullptr)
-        {
-        }
+        State(Action action = doNothing()) : m_action(action), m_firstLink(nullptr) {}
         ~State() = default;
 
     private:
@@ -108,10 +97,7 @@ public:
         }
 
     public:
-        bool atEnd() const
-        {
-            return (m_state == &m_machine.m_stop);
-        }
+        bool atEnd() const { return (m_state == &m_machine.m_stop); }
 
     private:
         const Machine& m_machine;
@@ -139,7 +125,7 @@ private:
  functions
  */
 
-template <typename TInput, typename TToken, typename TOutput>
+template<typename TInput, typename TToken, typename TOutput>
 void Machine<TInput, TToken, TOutput>::State::appendLink(Link& link)
 {
     if (m_firstLink)
@@ -148,7 +134,7 @@ void Machine<TInput, TToken, TOutput>::State::appendLink(Link& link)
         m_firstLink = &link;
 }
 
-template <typename TInput, typename TToken, typename TOutput>
+template<typename TInput, typename TToken, typename TOutput>
 const typename Machine<TInput, TToken, TOutput>::State* Machine<TInput, TToken, TOutput>::State::nextState(
     const TToken& token, TOutput& output) const
 {
@@ -158,7 +144,7 @@ const typename Machine<TInput, TToken, TOutput>::State* Machine<TInput, TToken, 
     return next;
 }
 
-template <typename TInput, typename TToken, typename TOutput>
+template<typename TInput, typename TToken, typename TOutput>
 void Machine<TInput, TToken, TOutput>::Link::appendToChain(Link& head, Link& node)
 {
     Link* l = &head;
@@ -169,7 +155,7 @@ void Machine<TInput, TToken, TOutput>::Link::appendToChain(Link& head, Link& nod
     l->m_nextLink = &node;
 }
 
-template <typename TInput, typename TToken, typename TOutput>
+template<typename TInput, typename TToken, typename TOutput>
 const typename Machine<TInput, TToken, TOutput>::State* Machine<TInput, TToken, TOutput>::Link::advanceState(
     const Machine<TInput, TToken, TOutput>::Link* head, TOutput& output, const TToken& token)
 {
@@ -187,7 +173,7 @@ const typename Machine<TInput, TToken, TOutput>::State* Machine<TInput, TToken, 
     return nullptr;
 }
 
-template <typename TInput, typename TToken, typename TOutput>
+template<typename TInput, typename TToken, typename TOutput>
 bool Machine<TInput, TToken, TOutput>::process(TInput& input, TOutput& output) const
 {
     const State* state = &m_start;
@@ -203,7 +189,7 @@ bool Machine<TInput, TToken, TOutput>::process(TInput& input, TOutput& output) c
     return true;
 }
 
-template <typename TInput, typename TToken, typename TOutput>
+template<typename TInput, typename TToken, typename TOutput>
 bool Machine<TInput, TToken, TOutput>::processStep(Iterator& it) const
 {
     TToken token;
