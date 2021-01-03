@@ -98,7 +98,8 @@ public:
 
     public:
         bool atEnd() const { return (m_state == &m_machine.m_stop); }
-
+        bool atState(const State& state) const { return (m_state == &state); }
+        
     private:
         const Machine& m_machine;
         TInput& m_input;
