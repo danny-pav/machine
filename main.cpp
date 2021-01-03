@@ -76,6 +76,7 @@ static Parser parser(sStart, sEnd, LoadChar);
 
 void testPass1(const std::string& s)
 {
+    std::cout << ">>>>" << std::endl;
     std::cout << "in:" << s << std::endl;
     InStr in(s);
     std::string out;
@@ -84,10 +85,12 @@ void testPass1(const std::string& s)
         std::cout << "ERROR" << std::endl;
     }
     std::cout << "out:" << out << std::endl;
+    std::cout << "<<<<" << std::endl;
 }
 
 void testPass2(const std::string& s)
 {
+    std::cout << ">>>>" << std::endl;
     std::cout << "in:" << s << std::endl;
     InStr in(s);
     std::string out;
@@ -102,9 +105,14 @@ void testPass2(const std::string& s)
             std::cout << "ERROR" << std::endl;
             break;
         }
+        if (it.atState(sDecimal))
+        {
+            std::cout << "At Decimal" << std::endl;
+        }
     }
-    std::cout << "steps=" << numSteps << std::endl;
+    std::cout << "steps:" << numSteps << std::endl;
     std::cout << "out:" << out << std::endl;
+    std::cout << "<<<<" << std::endl;
 }
 
 int main(int argc, const char* argv[])
