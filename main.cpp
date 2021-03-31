@@ -63,14 +63,20 @@ typedef Parser::State State;
 typedef Parser::Link Link;
 
 static State sStart;
-static State sDigit1(SaveChar);
+static State sDigit1;
 static State sDecimal;
-static State sDigit2(SaveChar);
-static State sEnd(SaveChar);
+static State sDigit2;
+static State sEnd;
 static Link links[] = {
-    {sStart, sDigit1, IsDigit},  {sDigit1, sDigit1, IsDigit},  {sDigit1, sDecimal, IsDecimal, SaveChar},
-    {sDigit1, sEnd, IsDone},     {sDecimal, sDigit2, IsDigit}, {sDecimal, sEnd, IsDone},
-    {sDigit2, sDigit2, IsDigit}, {sDigit2, sEnd, IsDone}};
+    {sStart, sDigit1, IsDigit, SaveChar},
+    {sDigit1, sDigit1, IsDigit, SaveChar},
+    {sDigit1, sDecimal, IsDecimal, SaveChar},
+    {sDigit1, sEnd, IsDone},
+    {sDecimal, sDigit2, IsDigit, SaveChar},
+    {sDecimal, sEnd, IsDone},
+    {sDigit2, sDigit2, IsDigit, SaveChar},
+    {sDigit2, sEnd, IsDone}
+};
 
 static Parser parser(sStart, sEnd, LoadChar);
 
